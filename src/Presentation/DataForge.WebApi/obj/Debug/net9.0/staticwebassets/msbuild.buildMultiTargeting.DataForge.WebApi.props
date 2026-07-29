@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\DataForge.WebApi.props" />
-</Project>
