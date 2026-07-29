@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DataForge.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f1614c55d3b9c1a1b9bae444dcf308d4d47764a9")]
 [assembly: System.Reflection.AssemblyProductAttribute("DataForge.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DataForge.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
