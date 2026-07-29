@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Eunms\" />
     <Folder Include="ValueObjects\" />
   </ItemGroup>
 
