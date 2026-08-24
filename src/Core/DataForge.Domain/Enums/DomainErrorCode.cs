@@ -1,6 +1,6 @@
-﻿namespace DataForge.Domain.Eunms
+﻿namespace DataForge.Domain.Enums
 {
-    public enum ErrorMessages
+    public enum DomainErrorCode
     {
         ProductInvalidName,
         ProductInvalidDescription,

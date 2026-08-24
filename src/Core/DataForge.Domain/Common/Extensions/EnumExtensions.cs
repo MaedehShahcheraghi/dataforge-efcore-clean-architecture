@@ -2,27 +2,32 @@
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace DataForge.Domain.Common.Extensions
+namespace DataForge.Domain.Common.Extensions;
+
+public static partial class EnumExtensions
 {
-    public static partial class EnumExtensions
+    public static string ToErrorCodeString(this Enum value)
     {
-        public static string ToErrorCodeString(this Enum value)
+        ArgumentNullException.ThrowIfNull(value);
+
+        var field = value
+            .GetType()
+            .GetField(value.ToString());
+
+        var description = field?
+            .GetCustomAttribute<DescriptionAttribute>()?
+            .Description;
+
+        if (!string.IsNullOrWhiteSpace(description))
         {
-            var field = value.GetType().GetField(value.ToString());
-
-            var attribute = field?.GetCustomAttribute<DescriptionAttribute>();
-            if (attribute != null)
-            {
-                return attribute.Description;
-            }
-
-            var name = value.ToString();
-            var snakeCase = SnakeCaseRegex().Replace(name, "_$0");
-
-            return snakeCase.ToUpperInvariant();
+            return description;
         }
 
-        [GeneratedRegex(@"(?<=.)([A-Z])")]
-        private static partial Regex SnakeCaseRegex();
+        return SnakeCaseRegex()
+            .Replace(value.ToString(), "_$1")
+            .ToLowerInvariant();
     }
+
+    [GeneratedRegex(@"(?<!^)([A-Z])")]
+    private static partial Regex SnakeCaseRegex();
 }

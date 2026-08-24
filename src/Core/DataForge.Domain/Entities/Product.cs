@@ -1,5 +1,5 @@
 ﻿using DataForge.Domain.Common.Entities;
-using DataForge.Domain.Eunms;
+using DataForge.Domain.Enums;
 using DataForge.Domain.Exceptions;
 
 namespace DataForge.Domain.Entities
@@ -47,8 +47,8 @@ namespace DataForge.Domain.Entities
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new BaseDomainExceptions(
-                    ErrorMessages.ProductInvalidName,
+                throw new DomainRuleException(
+                    DomainErrorCode.ProductInvalidName,
                     "Product name cannot be empty.");
             }
 
@@ -56,8 +56,8 @@ namespace DataForge.Domain.Entities
 
             if (normalizedName.Length > MaximumNameLength)
             {
-                throw new BaseDomainExceptions(
-                    ErrorMessages.ProductInvalidName,
+                throw new DomainRuleException(
+                    DomainErrorCode.ProductInvalidName,
                     $"Product name cannot exceed {MaximumNameLength} characters.");
             }
 
@@ -68,8 +68,8 @@ namespace DataForge.Domain.Entities
         {
             if (string.IsNullOrWhiteSpace(sku))
             {
-                throw new BaseDomainExceptions(
-                    ErrorMessages.ProductInvalidSku,
+                throw new DomainRuleException(
+                    DomainErrorCode.ProductInvalidSku,
                     $"Product SKU {nameof(sku)} cannot be empty.");
             }
 
@@ -77,8 +77,8 @@ namespace DataForge.Domain.Entities
 
             if (normalizedSku.Length > MaximumSkuLength)
             {
-                throw new BaseDomainExceptions(
-                    ErrorMessages.ProductInvalidSku,
+                throw new DomainRuleException(
+                    DomainErrorCode.ProductInvalidSku,
                     $"Product SKU cannot exceed {MaximumSkuLength} characters.");
             }
 
@@ -97,7 +97,7 @@ namespace DataForge.Domain.Entities
 
             if (normalizedDescription.Length > MaximumDescriptionLength)
             {
-                throw new BaseDomainExceptions(ErrorMessages.ProductInvalidDescription,
+                throw new DomainRuleException(DomainErrorCode.ProductInvalidDescription,
                     $"Product description cannot exceed {MaximumDescriptionLength} characters.");
             }
 
@@ -110,8 +110,8 @@ namespace DataForge.Domain.Entities
         {
             if (price < 0)
             {
-                throw new BaseDomainExceptions(
-                    ErrorMessages.ProductInvalidPrice,
+                throw new DomainRuleException(
+                    DomainErrorCode.ProductInvalidPrice,
                     "Product price cannot be negative.");
             }
 
@@ -124,8 +124,8 @@ namespace DataForge.Domain.Entities
 
             if (displayOrder < 0)
             {
-                throw new BaseDomainExceptions(
-                    ErrorMessages.ProductInvalidName,
+                throw new DomainRuleException(
+                    DomainErrorCode.ProductInvalidName,
                     "Display order cannot be negative.");
             }
 
