@@ -1,17 +1,29 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DataForge.Domain.Common.Entities;
-using DataForge.Domain.Eunms;
+using DataForge.Domain.Enums;
 using DataForge.Domain.Exceptions;
 
 namespace DataForge.Domain.Entities
 {
-    public class Category : Entity<int>
+    public class Category : Entity<long>
     {
         private readonly List<ProductCategory> _productCategories = [];
 
+        public IReadOnlyCollection<ProductCategory> ProductCategories =>
+            _productCategories;
         private Category()
         {
         }
+
+        public Category(string name, string slug)
+        {
+            PublicId = Guid.NewGuid();
+            IsActive = true;
+
+            Rename(name);
+            ChangeSlug(slug);
+        }
+
 
         public Guid PublicId { get; set; }
 
@@ -23,17 +35,17 @@ namespace DataForge.Domain.Entities
         public string Slug
         {
             get;
-            set;
+            protected set;
         } = null!;
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; protected set; }
 
         public void Rename(string name)
         {
             if (!string.IsNullOrEmpty(name))
             {
-                throw new BaseDomainExceptions(
-                    ErrorMessages.CategoryInvalidName,
+                throw new DomainRuleException(
+                    DomainErrorCode.CategoryInvalidName,
                     "Category name cannot be empty.");
             }
 
@@ -44,7 +56,7 @@ namespace DataForge.Domain.Entities
         {
             if (!string.IsNullOrEmpty(slug))
             {
-                throw new BaseDomainExceptions(ErrorMessages.CategoryInvalidSlug,
+                throw new DomainRuleException(DomainErrorCode.CategoryInvalidSlug,
                     "Category slug cannot be empty.");
             }
 

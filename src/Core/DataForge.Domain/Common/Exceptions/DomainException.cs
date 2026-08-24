@@ -1,16 +1,16 @@
 ﻿using DataForge.Domain.Common.Extensions;
-using DataForge.Domain.Eunms;
+using DataForge.Domain.Enums;
 
 namespace DataForge.Domain.Common.Exceptions
 {
     public abstract class DomainException : Exception
     {
         protected DomainException(
-            ErrorMessages errorCode,
+            DomainErrorCode domainErrorCode,
             string message)
             : base(message)
         {
-            var code = errorCode.ToErrorCodeString();
+            var code = domainErrorCode.ToErrorCodeString();
             if (string.IsNullOrWhiteSpace(code))
             {
                 throw new ArgumentException(
